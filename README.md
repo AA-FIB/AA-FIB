@@ -26,15 +26,6 @@ $ python solve_AA_FIB.py FIB mit 10 1e-6 1e-16; python evaluate_AA_FIB.py FIB mi
 You can check output in `result.txt`, `result_eval.txt`
 
 
-We also provide custom gym environment to test algorithms on LQR tasks. To install these environments, move to `gym_lqr` folder and install the package as follows:
-```
-$ cd gym_lqr && pip install -e .
-```
-By doing so, you register these new environments to gym registry, which enables you to create LQR environment instances by simply calling `make` function. The following code will make a 20-dimensional LQR environment:
-```
-env = gym.make('LinearQuadraticRegulator20D-v0')
-```
-
 ## 3. Solve/Evaluate
 ### 3.1 FIB
 Run vanilla FIB pomdp solver with following commands:
