@@ -17,7 +17,7 @@ Our code is tested on Ubuntu 18.04, with Python 3.7.4
 ## 2. Quick Start
 First, clone our repository with:
 ```
-$ git clone https://github.com/AA-FIB/AA-FIB.git && cd AA-FIB && mkdir solver solver0
+$ git clone https://github.com/POMDP-core/AA-FIB.git && cd AA-FIB && mkdir solver solver0
 ```
 Try solving simple example problem by:
 ```
