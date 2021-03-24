@@ -33,26 +33,27 @@ Run vanilla FIB pomdp solver with following commands:
 $ python solve_FIB.py FIB POMDP_file repeat_number precision (sample_number)
 $ python evaluate_FIB.py FIB POMDP_file number_runs
 ```
-Total 3 ~ 4 arguments should be given. Each are experimental parameters
+Total 3 ~ 4 arguments with argument 'FIB' should be given. Each are experimental parameters
 - POMDP_file : select the POMDP to be solved (among the files under examples/env)
 - repeat_number : number of initializations
 - precision : precision to stop the algorithm
-- sample_number : run simulated version of FIB update with sample number
+- sample_number : run simulated version of FIB update with sample number (optional)
 
 FIB solution will be saved in `./solver` directory
 
 ### 3.2 AA-FIB
 Run AA-FIB pomdp solver with following commands
-
-python solve_AA_FIB.py FIB POMDP_file repeat_number precision lambda (sample_number)
-python evaluate_AA_FIB.py FIB POMDP_file number_runs lambda
-
+```
+$ python solve_AA_FIB.py FIB POMDP_file repeat_number precision lambda (sample_number)
+$ python evaluate_AA_FIB.py FIB POMDP_file number_runs lambda
+```
+Total 5 ~ 6 arguments with argument 'FIB' should be given. Each are experimental parameters
 - POMDP_file : select the POMDP to be solved (among the files under examples/env)
 - repeat_number : number of initializations
 - lambda: regularization parameter eta in paper
 - number_runs : number of runs for the evaluation
 - precision : precision to stop the algorithm
-- sample_number : run simulated version of AA-FIB update with sample number
+- sample_number : run simulated version of AA-FIB update with sample number (optional)
 
 AA-FIB solution will be saved in `./solver` directory
 
