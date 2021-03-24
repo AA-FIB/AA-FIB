@@ -69,7 +69,7 @@ We provide our results with FIB under `./solver_exact`, for reporduction baselin
 
 
 ## 4. Work with other environments
-For custom environments, download .pomdp file from [POMDP.org][POMDP.org], [APPL][AAPL] to `./examples/env`.
+For custom environments, download .pomdp file from [POMDP.org][POMDP.org], [APPL][APPL] to `./examples/env`.
 
 .pomdp file sholud be parsed into .pickle files to be compatible with our code. This can be done by:
 ```
