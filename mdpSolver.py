@@ -60,13 +60,13 @@ class FIB(OfflineSolver):
         self.initial_vector = np.random.uniform(reward_min, reward_max,[len(self.pomdp.actions), len(self.pomdp.states)]) #if init else initial_vector
         self.Q_value = self.initial_vector
         self.environment = Environment(self.pomdp)
-        if self.s_num < 100:
+        if self.sample and self.s_num < 100:
             self.sample_size = 5
-        elif self.s_num < 1000:
+        elif self.sample and self.s_num < 1000:
             self.sample_size = 20
-        elif self.s_num < 10000:
+        elif self.sample and self.s_num < 10000:
             self.sample_size = 100
-        else:
+        elif self.sample and self.s_num >= 10000:
             print('Too large state space! not for sample update!')
             quit()
         
@@ -229,8 +229,7 @@ class A3FIB(OfflineSolver):
         time_step = 1
         max_abs_reward = np.max(np.abs(self.rewards))
 
-        Y, Y_list, S, S_list, Qc, delta_trans = [], [], [], [], [], []
-        Q_old, Y_list2 = [], []
+        Y, Y_list, S, S_list, Qc, Q_old, delta_trans = [], [], [], [], [], [], []
         self.Q_value, g0 = self.updateQValueFromValues()
         Qlast= self.Q_value.reshape(-1,1)
         Q_old = self.Q_value.reshape(-1)
@@ -252,12 +251,7 @@ class A3FIB(OfflineSolver):
                 
                 #print('Shape of gk : {}'.format(gk))
                 Qc.append(Qc_add)
-                '''
-                delta_trans.append(gk)
-                if time_step:
-                    Y_list.append(delta_trans[-1] - delta_trans[-2])
-                '''
-                Y_list2.append(gk - gk_old)
+                Y_list.append(gk - gk_old)
                 gk_old = gk
                 self.res.append(LA.norm(gk))
                 compare_v = self.Q_value.copy()
@@ -265,14 +259,12 @@ class A3FIB(OfflineSolver):
                 # Stack memory & dropout old memory
                 if len(Qc) > self.mem:
                     Qc.pop(0)
-                    #delta_trans.pop(0)
-                    #Y_list.pop(0)
-                    Y_list2.pop(0)
+                    Y_list.pop(0)
 
                 # AA weight calculation
                 and_start = time.time()
                 
-                Y = np.transpose(np.array(Y_list2))
+                Y = np.transpose(np.array(Y_list))
                 if time_step:
                     S = np.diff(Qlast)
                 else:
@@ -281,12 +273,6 @@ class A3FIB(OfflineSolver):
                 # Adaptive regularization
                 # self.lamb : eta in paper
                 lamb = self.lamb * (LA.norm(S, 'fro')**2 + LA.norm(Y, 'fro')**2)
-                '''
-                if self.ada_reg:
-                    lamb = self.lamb * (LA.norm(S, 'fro')**2 + LA.norm(Y, 'fro')**2)
-                else:
-                    lamb = self.lamb
-                '''
                 delta = Y
                 delta_t = np.transpose(delta)
                 reg_identity = lamb*np.identity(len(delta_t))
