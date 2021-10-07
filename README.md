@@ -1,3 +1,9 @@
+NOTICE
+====================================================
+
+We immigrated this repository under [new account][core-snu]! No maintenance will be provided under this repo.
+
+
 AA-FIB
 ====================================================
 
@@ -70,5 +76,6 @@ $ python convert_pomdp.py POMDP_file
 
 To run simulated version of AA-FIB with custon environments, you should get solution of exact version first, and copy them to `./solver_exact` directory.
 
+[core-snu]: https://github.com/CORE-SNU/AA-FIB
 [POMDP.org]: http://pomdp.org/examples/
 [APPL]: https://bigbird.comp.nus.edu.sg/pmwiki/farm/appl/index.php?n=Main.Repository
